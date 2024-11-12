@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador de Palabras Clave</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        #inputArea, #resultArea {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        #results {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        #wordDisplay {
+            width: 45%;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            overflow: auto;
+        }
+        #messageDisplay {
+            width: 45%;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Buscador de Palabras Clave</h1>
+
+<div id="inputArea">
+    <nav>
+        <button onclick="window.location.href='index.html'">Palabras Clave Encontradas</button>
+        <button onclick="window.location.href='index2.html'">Generar Autómata</button>
+        <button onclick="window.location.href='FUERZA.HTML'">Gravitación Universal</button>
+        <button onclick="window.location.href='inicio.html'">Inicio</button>
+    </nav>
+    <h2>Palabras Clave</h2>
+    <textarea id="keywordsInput" placeholder="Ingrese las palabras clave separadas por coma (Ejemplo: palabra1, palabra2)"></textarea>
+    <h2>Texto a Analizar</h2>
+    <textarea id="textInput" placeholder="Ingrese el texto aquí..."></textarea>
+    <button onclick="findKeywords()">Buscar Palabras Clave</button>
+</div>
+
+<div id="resultArea">
+    <div id="results">
+        <div id="wordDisplay">
+            <h3>Palabras Clave Encontradas</h3>
+            <pre id="foundWords"></pre>
+        </div>
+        <div id="messageDisplay">
+            <h3>Resultados</h3>
+            <pre id="message"></pre>
+        </div>
+    </div>
+</div>
+
+<script>
+    function findKeywords() {
+        const keywordsInput = document.getElementById('keywordsInput').value;
+        const textInput = document.getElementById('textInput').value;
+
+        // Obtener las palabras clave
+        const keywords = keywordsInput.split(',').map(word => word.trim());
+
+        // Buscar las palabras clave en el texto
+        const foundWords = keywords.filter(keyword => textInput.includes(keyword));
+
+        const message = foundWords.length > 0 
+            ? `Palabras clave encontradas: ${foundWords.join(', ')}`
+            : 'No se encontraron palabras clave en el texto.';
+
+        // Mostrar los resultados
+        document.getElementById('foundWords').innerText = foundWords.join(', ') || 'No se encontraron coincidencias.';
+        document.getElementById('message').innerText = message;
+    }
+</script>
+
+</body>
+</html>

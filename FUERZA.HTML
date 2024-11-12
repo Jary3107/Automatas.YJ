@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autómata de Gravitación</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <button onclick="window.location.href='index.html'">Palabras Clave Encontradas</button>
+            <button onclick="window.location.href='index2.html'">Generar Autómata</button>
+            <button onclick="window.location.href='FUERZA.HTML'">Gravitación Universal</button>
+            <button onclick="window.location.href='inicio.html'">Inicio</button>
+        </nav>
+        <h1>Autómata para Ley de Gravitación Universal</h1>
+
+        <!-- Selección de configuración -->
+        <label for="configuracion">Seleccione la configuración de masa:</label>
+        <select id="configuracion" onchange="mostrarFormulario()">
+            <option value="">-- Seleccionar --</option>
+            <option value="esfera">Esfera</option>
+            <option value="cilindro">Cilindro</option>
+            <option value="plano">Plano</option>
+        </select>
+
+        <!-- Formulario para esfera -->
+        <div id="formEsfera" class="formulario" style="display:none;">
+            <h2>Parámetros para Esfera</h2>
+            <label for="radioEsfera">Radio (m):</label>
+            <input type="number" id="radioEsfera" placeholder="Radio en metros">
+            <label for="masaEsfera">Masa (kg):</label>
+            <input type="number" id="masaEsfera" placeholder="Masa en kilogramos">
+            <label for="distanciaEsfera">Distancia desde el centro (m):</label>
+            <input type="number" id="distanciaEsfera" placeholder="Distancia en metros">
+            <button onclick="calcularCampoEsfera()">Calcular</button>
+        </div>
+
+        <!-- Formulario para cilindro -->
+        <div id="formCilindro" class="formulario" style="display:none;">
+            <h2>Parámetros para Cilindro</h2>
+            <label for="radioCilindro">Radio (m):</label>
+            <input type="number" id="radioCilindro" placeholder="Radio en metros">
+            <label for="densidadCilindro">Densidad lineal (kg/m):</label>
+            <input type="number" id="densidadCilindro" placeholder="Densidad lineal en kg/m">
+            <label for="distanciaCilindro">Distancia desde el eje (m):</label>
+            <input type="number" id="distanciaCilindro" placeholder="Distancia en metros">
+            <button onclick="calcularCampoCilindro()">Calcular</button>
+        </div>
+
+        <!-- Formulario para plano -->
+        <div id="formPlano" class="formulario" style="display:none;">
+            <h2>Parámetros para Plano</h2>
+            <label for="densidadPlano">Densidad superficial (kg/m^2):</label>
+            <input type="number" id="densidadPlano" placeholder="Densidad en kg/m²">
+            <button onclick="calcularCampoPlano()">Calcular</button>
+        </div>
+
+        <!-- Resultado -->
+        <div id="resultado" class="resultado"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

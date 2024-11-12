@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Autómata de Palabras Repetidas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        #inputArea, #resultArea {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        #results {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        #autoDisplay {
+            width: 45%;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            overflow: auto;
+        }
+        #messageDisplay {
+            width: 45%;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+        button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+    </style>
+</head>
+<body>
+
+<h1>Generador de Autómata de Palabras Repetidas</h1>
+
+<div id="inputArea">
+    <nav>
+        <button onclick="window.location.href='index.html'">Palabras Clave Encontradas</button>
+        <button onclick="window.location.href='index2.html'">Generar Autómata</button>
+        <button onclick="window.location.href='FUERZA.HTML'">Gravitación Universal</button>
+        <button onclick="window.location.href='inicio.html'">Inicio</button>
+    </nav>
+    <h2>Texto a Analizar</h2>
+    <textarea id="textInput" placeholder="Ingrese el texto aquí..."></textarea>
+    <button onclick="generateAutomaton()">Generar Autómata</button>
+</div>
+
+<div id="resultArea">
+    <div id="results">
+        <div id="autoDisplay">
+            <h3>Autómata Generado</h3>
+            <pre id="automaton"></pre>
+        </div>
+        <div id="messageDisplay">
+            <h3>Resultados</h3>
+            <pre id="message"></pre>
+        </div>
+    </div>
+</div>
+
+<script>
+    function generateAutomaton() {
+        const textInput = document.getElementById('textInput').value;
+        const wordCount = {};
+        const words = textInput.split(/\W+/).filter(word => word.length > 0);
+        words.forEach(word => {
+            word = word.toLowerCase();  // Normalizar la palabra
+            wordCount[word] = (wordCount[word] || 0) + 1;
+        });
+
+        const mostRepeatedWords = Object.entries(wordCount)
+            .sort((a, b) => b[1] - a[1]) // Ordenar por frecuencia
+            .slice(0, 5);  // Tomar las 5 más repetidas
+
+        if (mostRepeatedWords.length === 0) {
+            document.getElementById('message').innerText = "No se encontraron palabras.";
+            return;
+        }
+
+        const automaton = mostRepeatedWords.map(([word, count]) => {
+            const state = word.length > 4 ? 'Aceptado' : 'Rechazado';  // Estado de transición por número de letras
+            return `Palabra: ${word}, Letras: ${word.length}, Estado: ${state}`;
+        }).join('\n');
+
+        const message = `Palabras más repetidas:\n${mostRepeatedWords.map(([word, count]) => `${word}: ${count} veces`).join('\n')}`;
+
+        // Mostrar resultados
+        document.getElementById('automaton').innerText = automaton;
+        document.getElementById('message').innerText = message;
+    }
+</script>
+</body>
+</html>
